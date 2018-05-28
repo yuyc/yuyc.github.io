@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="//yuyc.github.io">
   <title>redis主从部署 | 最美年华</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装就不说了，详见《redis3.X安装》 基础配置创建6379,6380两个文件夹，分别拷贝一份redis.conf,redis-server 主从配置">
+  <meta name="description" content="安装就不说了，详见《redis3.X安装》  基础配置创建6379,6380两个文件夹，分别拷贝一份redis.conf,redis-server 主从配置">
 <meta name="keywords" content="redis cluster">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis主从部署">
 <meta property="og:url" content="//yuyc.github.io/2018/04/28/redis-cluster/index.html">
 <meta property="og:site_name" content="最美年华">
-<meta property="og:description" content="安装就不说了，详见《redis3.X安装》 基础配置创建6379,6380两个文件夹，分别拷贝一份redis.conf,redis-server 主从配置">
+<meta property="og:description" content="安装就不说了，详见《redis3.X安装》  基础配置创建6379,6380两个文件夹，分别拷贝一份redis.conf,redis-server 主从配置">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-28T14:28:41.609Z">
+<meta property="og:updated_time" content="2018-05-28T15:30:11.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis主从部署">
-<meta name="twitter:description" content="安装就不说了，详见《redis3.X安装》 基础配置创建6379,6380两个文件夹，分别拷贝一份redis.conf,redis-server 主从配置">
+<meta name="twitter:description" content="安装就不说了，详见《redis3.X安装》  基础配置创建6379,6380两个文件夹，分别拷贝一份redis.conf,redis-server 主从配置">
   
     <link rel="alternative" href="/atom.xml" title="最美年华" type="application/atom+xml">
   
@@ -180,13 +180,24 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>安装就不说了，详见《redis3.X安装》</p>
-<h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><p>创建<code>6379</code>,<code>6380</code>两个文件夹，分别拷贝一份<code>redis.conf</code>,<code>redis-server</code></p>
-<h2 id="主从配置"><a href="#主从配置" class="headerlink" title="主从配置"></a>主从配置</h2><a id="more"></a>
+<ul>
+<li>基础配置<br>创建<code>6379</code>,<code>6380</code>两个文件夹，分别拷贝一份<code>redis.conf</code>,<code>redis-server</code></li>
+<li>主从配置</li>
+</ul>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">#我们看一下redis的从服务器配置</span><br><span class="line">[root@centos6 6380]# grep -E -v &quot;(^$|^#)&quot; redis.conf</span><br><span class="line">#是否开启后台运行模式</span><br><span class="line">daemonize yes</span><br><span class="line">#redis的pid文件位置</span><br><span class="line">pidfile /var/run/redis.pid</span><br><span class="line">#redis的运行端口</span><br><span class="line">port 6380</span><br><span class="line"></span><br><span class="line">tcp-backlog 511</span><br><span class="line">timeout 0</span><br><span class="line">tcp-keepalive 0</span><br><span class="line">loglevel notice</span><br><span class="line">logfile &quot;&quot;</span><br><span class="line">databases 16</span><br><span class="line"></span><br><span class="line">#save 900 1 意思是900秒内有1次更改就执行rdb拷贝</span><br><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br><span class="line">stop-writes-on-bgsave-error yes</span><br><span class="line">rdbcompression yes</span><br><span class="line">rdbchecksum yes</span><br><span class="line">dbfilename dump.rdb</span><br><span class="line">dir ./</span><br><span class="line">#slaveof master服务器的ip地址及端口，这里我们master跟slave同机</span><br><span class="line">slaveof 192.168.59.128 6379</span><br><span class="line">#masterauth master的认证密码</span><br><span class="line">masterauth foot</span><br><span class="line">slave-serve-stale-data yes</span><br><span class="line">slave-read-only yes</span><br><span class="line">repl-diskless-sync no</span><br><span class="line">repl-diskless-sync-delay 5</span><br><span class="line">repl-disable-tcp-nodelay no</span><br><span class="line">slave-priority 100</span><br><span class="line">#requirepass redis服务的认证密码</span><br><span class="line">requirepass foot</span><br><span class="line"></span><br><span class="line">appendonly yes</span><br><span class="line">appendfilename &quot;appendonly.aof&quot;</span><br><span class="line">appendfsync everysec</span><br><span class="line">no-appendfsync-on-rewrite no</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br><span class="line">aof-load-truncated yes</span><br><span class="line">lua-time-limit 5000</span><br><span class="line">slowlog-log-slower-than 10000</span><br><span class="line">slowlog-max-len 128</span><br><span class="line">latency-monitor-threshold 0</span><br><span class="line">notify-keyspace-events &quot;&quot;</span><br><span class="line">hash-max-ziplist-entries 512</span><br><span class="line">hash-max-ziplist-value 64</span><br><span class="line">list-max-ziplist-entries 512</span><br><span class="line">list-max-ziplist-value 64</span><br><span class="line">set-max-intset-entries 512</span><br><span class="line">zset-max-ziplist-entries 128</span><br><span class="line">zset-max-ziplist-value 64</span><br><span class="line">hll-sparse-max-bytes 3000</span><br><span class="line">activerehashing yes</span><br><span class="line">client-output-buffer-limit normal 0 0 0</span><br><span class="line">client-output-buffer-limit slave 256mb 64mb 60</span><br><span class="line">client-output-buffer-limit pubsub 32mb 8mb 60</span><br><span class="line">hz 10</span><br><span class="line">aof-rewrite-incremental-fsync yes</span><br><span class="line">[root@centos6 6380]#</span><br></pre></td></tr></table></figure>
 <p>主从使用的就<code>slaveof</code>,<code>masterauth</code>这两项基础配置，其他可根据需要进行填写。<br>至于master的配置就不贴了，默认的配置即可，主要是<code>requirepass</code>设置下认证密码。</p>
-<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">分别启动master、slave</span><br><span class="line">#redis-server redis.conf</span><br><span class="line">查看集群信息</span><br><span class="line">#redis-cli</span><br><span class="line">&gt;info repcliation</span><br></pre></td></tr></table></figure>
-<h2 id="测试主从"><a href="#测试主从" class="headerlink" title="测试主从"></a>测试主从</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 6380]# /usr/local/src/redis-3.0.7/src/redis-cli</span><br><span class="line">127.0.0.1:6379&gt; auth foot</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set key3 3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get key3</span><br><span class="line">&quot;3&quot;</span><br><span class="line">127.0.0.1:6379&gt; exit</span><br><span class="line">[root@centos6 6380]# /usr/local/src/redis-3.0.7/src/redis-cli -h 127.0.0.1 -p 6380</span><br><span class="line">127.0.0.1:6380&gt; auth foot</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; get key3</span><br><span class="line">&quot;3&quot;</span><br><span class="line">127.0.0.1:6380&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+<ul>
+<li><p>启动服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">分别启动master、slave</span><br><span class="line">#redis-server redis.conf</span><br><span class="line">查看集群信息</span><br><span class="line">#redis-cli</span><br><span class="line">&gt;info repcliation</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试主从</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 6380]# /usr/local/src/redis-3.0.7/src/redis-cli</span><br><span class="line">127.0.0.1:6379&gt; auth foot</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; set key3 3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get key3</span><br><span class="line">&quot;3&quot;</span><br><span class="line">127.0.0.1:6379&gt; exit</span><br><span class="line">[root@centos6 6380]# /usr/local/src/redis-3.0.7/src/redis-cli -h 127.0.0.1 -p 6380</span><br><span class="line">127.0.0.1:6380&gt; auth foot</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; get key3</span><br><span class="line">&quot;3&quot;</span><br><span class="line">127.0.0.1:6380&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成</p>
+</li>
+</ul>
+
       
 
       
@@ -304,7 +315,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          数据结构系列之一
+          数据结构系列之一《导言》
         
       </div>
     </a>
