@@ -6,19 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="//yuyc.github.io">
-  <title>awk学习 | 春风依旧</title>
+  <title>数据结构系列之一 | 春风依旧</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#awk记录 ##awk初识awk是一个高效的文本处理工具。awk通过文件或流读取数据，然后根据指定的分隔符对数据进行切片，然后通过规则对数据进行处理，最后输出！我们在linux上经常使用的unix awk的GUN版：gawk。 ##awk基础概念awk有三个基础概念：  字段 数据 规则  如下数据文件data.txt所示：12345姓名 上午 下午陈二 数学 化学张三 语文 数学李四 数学 体">
-<meta property="og:type" content="website">
-<meta property="og:title" content="awk学习">
-<meta property="og:url" content="//yuyc.github.io/awk学习/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="数据结构系列之一">
+<meta property="og:url" content="//yuyc.github.io/2018/05/28/data-structure/index.html">
 <meta property="og:site_name" content="春风依旧">
-<meta property="og:description" content="#awk记录 ##awk初识awk是一个高效的文本处理工具。awk通过文件或流读取数据，然后根据指定的分隔符对数据进行切片，然后通过规则对数据进行处理，最后输出！我们在linux上经常使用的unix awk的GUN版：gawk。 ##awk基础概念awk有三个基础概念：  字段 数据 规则  如下数据文件data.txt所示：12345姓名 上午 下午陈二 数学 化学张三 语文 数学李四 数学 体">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-21T12:20:30.554Z">
+<meta property="og:updated_time" content="2018-05-28T14:09:58.834Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="awk学习">
-<meta name="twitter:description" content="#awk记录 ##awk初识awk是一个高效的文本处理工具。awk通过文件或流读取数据，然后根据指定的分隔符对数据进行切片，然后通过规则对数据进行处理，最后输出！我们在linux上经常使用的unix awk的GUN版：gawk。 ##awk基础概念awk有三个基础概念：  字段 数据 规则  如下数据文件data.txt所示：12345姓名 上午 下午陈二 数学 化学张三 语文 数学李四 数学 体">
+<meta name="twitter:title" content="数据结构系列之一">
   
     <link rel="alternative" href="/atom.xml" title="春风依旧" type="application/atom+xml">
   
@@ -154,42 +151,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-data-structure" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      awk学习
+      数据结构系列之一
     </h1>
   
 
         
-        <a href="/awk学习/index.html" class="archive-article-date">
-  	<time datetime="2018-04-21T12:19:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-21</time>
+        <a href="/2018/05/28/data-structure/" class="archive-article-date">
+  	<time datetime="2018-05-28T14:09:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#awk记录</p>
-<p>##awk初识<br>awk是一个高效的文本处理工具。awk通过文件或流读取数据，然后根据指定的分隔符对数据进行切片，然后通过规则对数据进行处理，最后输出！我们在linux上经常使用的unix awk的GUN版：gawk。</p>
-<p>##awk基础概念<br>awk有三个基础概念：</p>
-<ul>
-<li>字段</li>
-<li>数据</li>
-<li>规则</li>
-</ul>
-<p>如下数据文件data.txt所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">姓名 上午 下午</span><br><span class="line">陈二 数学 化学</span><br><span class="line">张三 语文 数学</span><br><span class="line">李四 数学 体育</span><br><span class="line">王五 地理 语文</span><br></pre></td></tr></table></figure></p>
-<p>awk读取如上数据后，根据记录分割符RS(默认是换行符)把数据分为5条记录，根据字段分割符FS(默认是空格)把记录分成3个字段，并把每个字段赋予$1,$2…,$0表示整条记录。然后根据规则进行处理输出。<br>awk的命令形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk [options] &apos;script&apos; FILE.... </span><br><span class="line">awk [options] &apos;/pattern/&#123;action&#125;&apos; FILE...</span><br></pre></td></tr></table></figure></p>
-<p>1.如果我们想查看每个人上午什么课，就可以执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@kali2:~# awk &apos;&#123;print $1,$2&#125;&apos; data.txt</span><br><span class="line">姓名 上午</span><br><span class="line">陈二 数学</span><br><span class="line">张三 语文</span><br><span class="line">李四 数学</span><br><span class="line">王五 地理</span><br></pre></td></tr></table></figure></p>
-<p>在这一条操作中我们只是使用{action}即“{print $1,$2}”，其中$1,$2打印的是第一，第二列文件。</p>
-<p>2.如果我们想查看张三的一天上什么课，就可以执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali2:~# awk &apos;/^张三/&#123;print $0&#125;&apos; data.txt</span><br><span class="line">张三 语文 数学</span><br></pre></td></tr></table></figure></p>
-<p>在这一条操作中我们使用了”//“及{print},”//“内使用的是正则表达式，/^张三/表示匹配以张三开头的记录，{print $0}表示打印这条记录。<br>3.如果我们想查看上午是数学的课的学生的课表，就可以执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@kali2:~# awk &apos;$2 ~ /数学/&#123;print $1&#125;&apos; data.txt</span><br><span class="line">陈二</span><br><span class="line">李四</span><br></pre></td></tr></table></figure></p>
-<p>在这一条操作中我们使用了”~”表达式，表示第二列中匹配“数学”字符串的记录就打印出$1即第一列。</p>
-
+        
       
 
       
@@ -268,7 +250,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yuyc.github.io/awk学习/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yuyc.github.io/2018/05/28/data-structure/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,6 +262,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/28/redis-cluster/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">redis主从部署</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -330,7 +322,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
@@ -398,6 +390,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">主从配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">awk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">redis cluster</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
